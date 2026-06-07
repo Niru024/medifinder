@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MediFinder — Find medicine availability across nearby medical stores instantly.">
+  <title>{{ title if title else "MediFinder" }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Particle canvas background -->
+  <canvas id="bg-particles"></canvas>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a class="brand" href="{{ url_for('index') }}">
+      <span class="brand-badge">M</span>
+      <span>MediFinder</span>
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">🏠 Home</a>
+      <a href="{{ url_for('about') }}">ℹ️ About</a>
+      <a href="{{ url_for('help_page') }}">❓ Help</a>
+      {% if session.get('role') == 'user' %}
+        <a href="{{ url_for('dashboard') }}">📊 Dashboard</a>
+        <a href="{{ url_for('logout') }}" class="btn-link">⬡ Logout</a>
+      {% elif session.get('role') == 'admin' %}
+        <a href="{{ url_for('admin_dashboard') }}">🛡️ Admin</a>
+        <a href="{{ url_for('admin_logout') }}" class="btn-link">⬡ Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}" class="btn-link">✦ Register</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-wrap">
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 <span>MediFinder</span> — Medicine Availability Checker · Built with ♥</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

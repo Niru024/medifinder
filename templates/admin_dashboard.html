@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediFinder Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#ffcfb9",
+              "primary": "#00478d",
+              "surface-container-high": "#e6e8ea",
+              "surface-container-highest": "#e0e3e5",
+              "on-secondary-fixed-variant": "#22496d",
+              "inverse-on-surface": "#eff1f3",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#f7f9fb",
+              "surface-container-low": "#f2f4f6",
+              "secondary-fixed": "#d0e4ff",
+              "on-background": "#191c1e",
+              "outline": "#727783",
+              "surface-container-lowest": "#ffffff",
+              "surface-dim": "#d8dadc",
+              "surface-variant": "#e0e3e5",
+              "tertiary-fixed-dim": "#ffb691",
+              "tertiary-container": "#9f4300",
+              "on-primary-fixed": "#001b3d",
+              "primary-fixed": "#d6e3ff",
+              "secondary-fixed-dim": "#a5caf4",
+              "tertiary-fixed": "#ffdbcb",
+              "on-secondary-container": "#355b7f",
+              "background": "#f7f9fb",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#793100",
+              "on-error": "#ffffff",
+              "on-primary": "#ffffff",
+              "primary-container": "#005eb8",
+              "secondary": "#3c6186",
+              "on-surface-variant": "#424752",
+              "inverse-surface": "#2d3133",
+              "surface-tint": "#005db6",
+              "inverse-primary": "#a9c7ff",
+              "on-primary-fixed-variant": "#00468c",
+              "on-surface": "#191c1e",
+              "secondary-container": "#add2fd",
+              "outline-variant": "#c2c6d4",
+              "on-error-container": "#93000a",
+              "surface": "#f7f9fb",
+              "on-tertiary-fixed": "#341100",
+              "primary-fixed-dim": "#a9c7ff",
+              "surface-container": "#eceef0",
+              "tertiary": "#793100",
+              "error-container": "#ffdad6",
+              "on-primary-container": "#c8daff",
+              "error": "#ba1a1a",
+              "on-secondary-fixed": "#001d34"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-module {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-pill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="bg-slate-50 dark:bg-slate-950 h-screen w-64 border-r border-slate-200/20 fixed left-0 top-0 z-40">
+<div class="flex flex-col h-full py-6 px-4">
+<div class="mb-10 px-2">
+<span class="text-lg font-black text-blue-800 dark:text-blue-200 font-headline tracking-tight">MediFinder</span>
+<p class="text-[10px] text-slate-500 font-medium tracking-widest uppercase mt-1">Admin Panel</p>
+</div>
+<div class="flex items-center gap-3 px-2 mb-8 bg-surface-container-low p-3 rounded-xl">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="professional portrait of a hospital administrator in a clinical setting with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDba8XO1yK7b_knm7m6a31tetRKuAIsVxZj2N4itTBGXWAKsxlK6ccXN8h9bS7_EFqbcd1Y98fnX8cRQwoA55DNZwnLcp95dyRQYIiP8ksyfBOBEdOti2A0BaHwq8BK0MqCYGYhuCIby_yhjMFzG_7P5mfthf6B6DzjQbaFr0PUrLQiiteZaczjMYQ5crurbRjjS-gq1N3PG7BWBbmqXjdCaOV8C31nwdjotieuqgBVAZRDwOyyYRSkgJ_JJy94t2MrpUUp4jqtMqI"/>
+</div>
+<div>
+<p class="text-xs font-bold font-headline text-on-surface">Pharmacy Manager</p>
+<p class="text-[10px] text-on-surface-variant">Admin User</p>
+</div>
+</div>
+<nav class="space-y-1 flex-1">
+<a class="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg flex items-center gap-3 px-3 py-2.5 transition-all duration-200 ease-in-out group" href="{{ url_for('admin_dashboard') }}">
+<span class="material-symbols-outlined active-pill" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium font-label">Dashboard</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 flex items-center gap-3 px-3 py-2.5 transition-all duration-200 ease-in-out rounded-lg group" href="{{ url_for('add_medicine') }}">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-sm font-medium font-label">Inventory</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 flex items-center gap-3 px-3 py-2.5 transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm font-medium font-label">Store Settings</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 flex items-center gap-3 px-3 py-2.5 transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-sm font-medium font-label">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-200/10">
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 flex items-center gap-3 px-3 py-2.5 transition-all duration-200 ease-in-out rounded-lg group" href="{{ url_for('help_page') }}">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-sm font-medium font-label">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 min-h-screen flex flex-col">
+<!-- Dashboard Content -->
+<div class="p-8 space-y-12 flex-1">
+<!-- Header & Quick Actions -->
+<header class="flex justify-between items-end">
+<div>
+<h1 class="text-4xl font-extrabold font-headline tracking-tight text-on-surface">Pharmacy Dashboard</h1>
+<p class="text-on-surface-variant mt-2 text-lg">Good morning. Here is what is happening across your network today.</p>
+</div>
+<div class="flex gap-4">
+<a href="{{ url_for('add_medicine') }}" class="bg-gradient-to-r from-primary to-primary-container text-on-primary font-semibold px-6 py-3 rounded-lg shadow-xl shadow-primary/10 hover:opacity-90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-xl" data-icon="add">add</span>
+                            Add New Medicine
+                        </a>
+<a href="{{ url_for('admin_logout') }}" class="bg-surface-container-high text-on-surface font-semibold px-6 py-3 rounded-lg hover:bg-surface-container-highest transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">logout</span>
+                            Logout
+                        </a>
+</div>
+</header>
+<!-- Stats Bento Grid -->
+<section class="grid grid-cols-4 gap-6">
+<div class="surface-container-lowest glass-module p-6 rounded-xl border border-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="medication">medication</span>
+</div>
+<span class="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">LIVE</span>
+</div>
+<p class="text-3xl font-black font-headline text-on-surface">{{ medicines|length }}</p>
+<p class="text-on-surface-variant text-sm font-medium">Total Medicines</p>
+</div>
+<div class="surface-container-lowest glass-module p-6 rounded-xl border border-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary/5 rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<p class="text-3xl font-black font-headline text-on-surface">1,102</p>
+<p class="text-on-surface-variant text-sm font-medium">Available</p>
+</div>
+<div class="surface-container-lowest glass-module p-6 rounded-xl border border-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-error/5 rounded-lg">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+</div>
+<span class="text-[10px] font-bold text-error bg-error/10 px-2 py-0.5 rounded-full">+12%</span>
+</div>
+<p class="text-3xl font-black font-headline text-on-surface">182</p>
+<p class="text-on-surface-variant text-sm font-medium">Out of Stock</p>
+</div>
+<div class="surface-container-lowest glass-module p-6 rounded-xl border border-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-container/10 rounded-lg">
+<span class="material-symbols-outlined text-primary-container" data-icon="store">store</span>
+</div>
+</div>
+<p class="text-3xl font-black font-headline text-on-surface">42</p>
+<p class="text-on-surface-variant text-sm font-medium">Registered Stores</p>
+</div>
+</section>
+<!-- Recent Activity & Staggered List -->
+<section class="grid grid-cols-12 gap-8">
+<!-- Activity Feed -->
+<div class="col-span-8">
+<div class="flex justify-between items-center mb-6 px-2">
+<h2 class="text-xl font-bold font-headline">Recent Activity</h2>
+<button class="text-primary text-sm font-semibold hover:underline decoration-primary/30 underline-offset-4">View History</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-sm">
+<thead>
+<tr class="text-left text-xs font-bold uppercase tracking-widest text-on-surface-variant border-b border-outline-variant/10">
+<th class="pb-4 pr-4">Medicine</th>
+<th class="pb-4 pr-4">Store</th>
+<th class="pb-4 pr-4">Dosage</th>
+<th class="pb-4 pr-4">Qty</th>
+<th class="pb-4 pr-4">Status</th>
+<th class="pb-4">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+{% for med in medicines %}
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-4 pr-4 font-bold text-on-surface">{{ med['medicine_name'] }}<br><span class="text-xs font-normal text-on-surface-variant">{{ med['company_name'] or '—' }}</span></td>
+<td class="py-4 pr-4 text-on-surface-variant">{{ med['store_name'] }}</td>
+<td class="py-4 pr-4 text-on-surface-variant">{{ med['dosage'] or '—' }}</td>
+<td class="py-4 pr-4 font-semibold">{{ med['quantity'] }}</td>
+<td class="py-4 pr-4">
+{% if med['stock_status'] == 'Available' %}
+<span class="px-3 py-1 bg-primary-container text-on-primary-container text-[10px] font-bold rounded-full uppercase tracking-tighter">Available</span>
+{% else %}
+<span class="px-3 py-1 bg-error-container text-on-error-container text-[10px] font-bold rounded-full uppercase tracking-tighter">Out of Stock</span>
+{% endif %}
+</td>
+<td class="py-4">
+<div class="flex items-center gap-3">
+<a href="{{ url_for('edit_medicine', medicine_id=med['id']) }}" class="text-primary hover:text-primary-container font-semibold text-xs flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">edit</span> Edit
+</a>
+<a href="{{ url_for('delete_medicine', medicine_id=med['id']) }}" onclick="return confirm('Delete this medicine?')" class="text-error hover:text-error-container font-semibold text-xs flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">delete</span> Delete
+</a>
+</div>
+</td>
+</tr>
+{% else %}
+<tr><td colspan="6" class="py-12 text-center text-on-surface-variant">No medicines found. <a href="{{ url_for('add_medicine') }}" class="text-primary font-bold hover:underline">Add one now →</a></td></tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+<!-- Side Stats/Info Card -->
+<div class="col-span-4 space-y-6">
+<div class="bg-primary text-on-primary p-8 rounded-2xl relative overflow-hidden shadow-2xl shadow-primary/20 h-full flex flex-col">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+<h3 class="text-2xl font-bold font-headline mb-4 relative z-10 leading-tight">Digital Health Integration</h3>
+<p class="text-on-primary/80 text-sm mb-8 flex-1 leading-relaxed">System sync is currently at 98.4%. All registered pharmacies are transmitting real-time stock levels.</p>
+<div class="space-y-4 mb-8">
+<div class="bg-white/10 p-4 rounded-xl backdrop-blur-md">
+<p class="text-[10px] font-bold uppercase tracking-widest text-white/60 mb-1">Last Sync</p>
+<p class="font-bold">12:04 PM Today</p>
+</div>
+</div>
+<button class="bg-white text-primary font-bold py-3 px-6 rounded-lg text-sm hover:scale-[1.02] transition-transform duration-200">
+                                Force Global Sync
+                            </button>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 w-full py-12 px-8 border-t border-slate-200/10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+<div>
+<span class="text-xl font-bold text-slate-900 dark:text-white font-headline">MediFinder</span>
+<p class="mt-4 text-slate-500 hover:text-blue-500 text-sm tracking-wide leading-relaxed">
+                            © 2024 MediFinder. The Digital Sanctuary for Health. Dedicated to making medical data accessible and reliable.
+                        </p>
+</div>
+<div class="flex flex-col gap-3">
+<h5 class="text-xs font-black uppercase tracking-[0.2em] text-blue-700 dark:text-blue-400 mb-2">Resource Center</h5>
+<a class="text-slate-500 hover:text-blue-500 text-sm tracking-wide transition-opacity duration-300 underline decoration-blue-500/30 underline-offset-4" href="{{ url_for('about') }}">About</a>
+<a class="text-slate-500 hover:text-blue-500 text-sm tracking-wide transition-opacity duration-300 underline decoration-blue-500/30 underline-offset-4" href="{{ url_for('help_page') }}">Help</a>
+</div>
+<div class="flex flex-col gap-3">
+<h5 class="text-xs font-black uppercase tracking-[0.2em] text-blue-700 dark:text-blue-400 mb-2">Legal &amp; Partners</h5>
+<a class="text-slate-500 hover:text-blue-500 text-sm tracking-wide transition-opacity duration-300 underline decoration-blue-500/30 underline-offset-4" href="#">Pharmacy Partners</a>
+<a class="text-slate-500 hover:text-blue-500 text-sm tracking-wide transition-opacity duration-300 underline decoration-blue-500/30 underline-offset-4" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

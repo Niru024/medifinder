@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediFinder - Check Medicine Availability</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#ffcfb9",
+              "primary": "#00478d",
+              "surface-container-high": "#e6e8ea",
+              "surface-container-highest": "#e0e3e5",
+              "on-secondary-fixed-variant": "#22496d",
+              "inverse-on-surface": "#eff1f3",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#f7f9fb",
+              "surface-container-low": "#f2f4f6",
+              "secondary-fixed": "#d0e4ff",
+              "on-background": "#191c1e",
+              "outline": "#727783",
+              "surface-container-lowest": "#ffffff",
+              "surface-dim": "#d8dadc",
+              "surface-variant": "#e0e3e5",
+              "tertiary-fixed-dim": "#ffb691",
+              "tertiary-container": "#9f4300",
+              "on-primary-fixed": "#001b3d",
+              "primary-fixed": "#d6e3ff",
+              "secondary-fixed-dim": "#a5caf4",
+              "tertiary-fixed": "#ffdbcb",
+              "on-secondary-container": "#355b7f",
+              "background": "#f7f9fb",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#793100",
+              "on-error": "#ffffff",
+              "on-primary": "#ffffff",
+              "primary-container": "#005eb8",
+              "secondary": "#3c6186",
+              "on-surface-variant": "#424752",
+              "inverse-surface": "#2d3133",
+              "surface-tint": "#005db6",
+              "inverse-primary": "#a9c7ff",
+              "on-primary-fixed-variant": "#00468c",
+              "on-surface": "#191c1e",
+              "secondary-container": "#add2fd",
+              "outline-variant": "#c2c6d4",
+              "on-error-container": "#93000a",
+              "surface": "#f7f9fb",
+              "on-tertiary-fixed": "#341100",
+              "primary-fixed-dim": "#a9c7ff",
+              "surface-container": "#eceef0",
+              "tertiary": "#793100",
+              "error-container": "#ffdad6",
+              "on-primary-container": "#c8daff",
+              "error": "#ba1a1a",
+              "on-secondary-fixed": "#001d34"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-module {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 h-16 bg-white/70 backdrop-blur-xl bg-slate-100/10">
+<a class="text-2xl font-bold tracking-tight text-blue-900" href="{{ url_for('index') }}">MediFinder</a>
+<div class="hidden md:flex space-x-8 items-center">
+<a class="text-blue-700 font-bold border-b-2 border-blue-700 hover:bg-slate-50 transition-colors" href="{{ url_for('index') }}">Home</a>
+<a class="text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-colors" href="{{ url_for('about') }}">About</a>
+<a class="text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-colors" href="{{ url_for('help_page') }}">Help</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="material-symbols-outlined text-on-surface-variant cursor-pointer" data-icon="account_circle">account_circle</div>
+<a href="{{ url_for('logout') }}" class="bg-gradient-to-r from-primary to-primary-container text-on-primary px-6 py-2 rounded font-medium transition-all active:scale-95 active:opacity-80">Logout</a>
+</div>
+</nav>
+<main class="pt-24 pb-20 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
+<!-- Header & Search Section -->
+<section class="mb-16">
+<div class="max-w-3xl">
+<h1 class="font-headline text-5xl font-extrabold tracking-tight text-on-surface mb-6 leading-tight">
+                    Hello, {{ session.get('user_name', 'there') }}! 👋
+                </h1>
+<p class="text-lg text-on-surface-variant mb-10 max-w-xl">
+                    Search our verified network of pharmacy partners to find your required medication instantly.
+                </p>
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}{% for category, message in messages %}<div class="mb-3 px-4 py-3 rounded-xl text-sm font-semibold {% if category == 'success' %}bg-green-50 text-green-800{% elif category == 'danger' %}bg-red-50 text-red-800{% else %}bg-blue-50 text-blue-800{% endif %}">{{ message }}</div>{% endfor %}{% endif %}{% endwith %}
+<form method="GET" action="{{ url_for('dashboard') }}" class="relative group">
+<div class="absolute inset-y-0 left-5 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+</div>
+<input class="w-full h-16 pl-14 pr-32 rounded-xl bg-surface-container-lowest border-0 ring-1 ring-outline-variant/15 focus:ring-primary/40 focus:bg-surface-bright transition-all text-lg shadow-sm" name="q" placeholder="Enter medicine name (e.g. Amoxicillin, Insulin)..." type="text" value="{{ query or '' }}" required/>
+<button type="submit" class="absolute right-2 top-2 bottom-2 px-8 bg-primary text-on-primary rounded-lg font-semibold hover:bg-primary-container transition-colors">
+                        Search
+                    </button>
+</form>
+</div>
+</section>
+<!-- Results Grid -->
+<section class="space-y-8">
+{% if searched %}
+<div class="flex items-baseline justify-between mb-4">
+<h2 class="font-headline text-2xl font-bold">Results for "{{ query }}"</h2>
+<span class="text-sm font-label text-outline">{{ medicines|length }} item(s) found</span>
+</div>
+{% if medicines %}
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+{% for med in medicines %}
+<div class="glass-module p-6 rounded-xl ring-1 ring-outline-variant/15 hover:shadow-2xl hover:shadow-primary/5 transition-all">
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 bg-primary-fixed rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="medication">medication</span>
+</div>
+{% if med['stock_status'] == 'Available' %}
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary-container text-on-primary-container">Available</span>
+{% else %}
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-error-container text-on-error-container">Out of Stock</span>
+{% endif %}
+</div>
+<h3 class="font-headline text-xl font-bold mb-1">{{ med['medicine_name'] }}</h3>
+<p class="text-on-surface-variant text-sm mb-4">{{ med['dosage'] or 'No dosage info' }}</p>
+<div class="space-y-2 pt-4 border-t border-outline-variant/10">
+<div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">local_pharmacy</span><span class="text-sm font-medium">{{ med['company_name'] or '–' }}</span></div>
+<div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">store</span><span class="text-sm font-medium">{{ med['store_name'] }}</span></div>
+<div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">call</span><span class="text-sm font-medium">{{ med['contact'] or '–' }}</span></div>
+<div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">location_on</span><span class="text-sm font-medium">{{ med['address'] or '–' }}</span></div>
+<div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">inventory_2</span><span class="text-sm font-medium">Qty: {{ med['quantity'] }}</span></div>
+</div>
+</div>
+{% endfor %}
+</div>
+{% else %}
+<div class="flex flex-col items-center justify-center py-24 text-center bg-surface-container-low rounded-3xl border-2 border-dashed border-outline-variant/20">
+<div class="w-24 h-24 bg-surface-container-highest rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl text-outline" data-icon="search_off">search_off</span>
+</div>
+<h3 class="text-2xl font-headline font-bold mb-2">No results found</h3>
+<p class="text-on-surface-variant max-w-xs">We couldn't find any pharmacy with "{{ query }}". Try a different name.</p>
+</div>
+{% endif %}
+{% else %}
+<div class="flex flex-col items-center justify-center py-24 text-center bg-surface-container-low rounded-3xl border-2 border-dashed border-outline-variant/20">
+<div class="w-24 h-24 bg-surface-container-highest rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl text-outline">medication</span>
+</div>
+<h3 class="text-2xl font-headline font-bold mb-2">Search for a medicine</h3>
+<p class="text-on-surface-variant max-w-xs">Type a medicine name above to check availability across all registered stores.</p>
+</div>
+{% endif %}
+</section>
+<!-- Informational Bento Grid -->
+<section class="mt-24 grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[500px]">
+<div class="md:col-span-2 md:row-span-2 bg-primary rounded-3xl p-8 flex flex-col justify-end relative overflow-hidden group">
+<img alt="Pharmacist checking inventory" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay group-hover:scale-105 transition-transform duration-700" data-alt="professional pharmacist in a white lab coat organizing medicine shelves in a modern clean pharmacy with bright soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVahE71bBr00xM0PFnY3_RcWhU4Zm9xtGE18rUZwVsjtwRq0PCBycaYjqE14M99azmuyXSEhycDSaRzXN2w1bIM1EQ3VPjUkMEEopscMRFpZPCtQiLzK6fX_yhnWrf2jStAbx2ljqk1nZOV6IkbQOi708aBBQwTGTzKxLF4EyL4oLg5QA2oUcR0LKxQP1qj7KXDBP24541p0J9whTQ-UhfE7VBpBC0Q35TkVWZXVG2YS5IinuRvWMUCzKO1epMwlqIUKQujtm1Pls"/>
+<div class="relative z-10">
+<h4 class="text-white font-headline text-3xl font-bold mb-2">Verified Partners</h4>
+<p class="text-on-primary-container text-lg">We collaborate with over 500+ licensed pharmacies to ensure data accuracy.</p>
+</div>
+</div>
+<div class="md:col-span-2 bg-tertiary-fixed rounded-3xl p-8 flex items-center gap-6 overflow-hidden">
+<div class="flex-1">
+<h4 class="text-on-tertiary-fixed font-headline text-2xl font-bold mb-1">Fast Delivery</h4>
+<p class="text-on-tertiary-fixed-variant text-sm">Need it urgently? Check which pharmacies offer same-day home delivery.</p>
+</div>
+<span class="material-symbols-outlined text-5xl text-tertiary opacity-30" data-icon="speed">speed</span>
+</div>
+<div class="md:col-span-1 bg-secondary-container rounded-3xl p-8 flex flex-col justify-center">
+<span class="material-symbols-outlined text-3xl text-secondary mb-4" data-icon="verified_user" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<h4 class="text-on-secondary-container font-headline text-lg font-bold">Safe &amp; Secure</h4>
+</div>
+<div class="md:col-span-1 bg-surface-container-highest rounded-3xl p-8 flex flex-col justify-center">
+<span class="material-symbols-outlined text-3xl text-primary mb-4" data-icon="support_agent">support_agent</span>
+<h4 class="text-on-surface font-headline text-lg font-bold">24/7 Help</h4>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 border-t border-slate-200/10 bg-slate-50">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+<div>
+<div class="text-xl font-bold text-slate-900 mb-4">MediFinder</div>
+<p class="text-slate-500 text-sm tracking-wide leading-relaxed">
+                    © 2024 MediFinder. The Digital Sanctuary for Health. Empowering users with real-time medicine transparency.
+                </p>
+</div>
+<div class="flex flex-col gap-3">
+<h5 class="font-bold text-slate-900 mb-1">Quick Links</h5>
+<a class="text-slate-500 text-sm hover:text-blue-500 underline decoration-blue-500/30 underline-offset-4 transition-opacity" href="{{ url_for('about') }}">About</a>
+<a class="text-slate-500 text-sm hover:text-blue-500 underline decoration-blue-500/30 underline-offset-4 transition-opacity" href="{{ url_for('help_page') }}">Help</a>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-bold text-slate-900 mb-1">Newsletter</h5>
+<p class="text-slate-500 text-sm">Stay updated on new pharmacy partnerships.</p>
+<div class="flex gap-2">
+<input class="bg-white border-0 ring-1 ring-outline-variant/10 rounded-lg px-4 py-2 text-sm w-full" placeholder="Email" type="email"/>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-bold">Join</button>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

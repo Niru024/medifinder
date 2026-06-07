@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About &amp; Help | MediFinder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#ffcfb9",
+              "primary": "#00478d",
+              "surface-container-high": "#e6e8ea",
+              "surface-container-highest": "#e0e3e5",
+              "on-secondary-fixed-variant": "#22496d",
+              "inverse-on-surface": "#eff1f3",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#f7f9fb",
+              "surface-container-low": "#f2f4f6",
+              "secondary-fixed": "#d0e4ff",
+              "on-background": "#191c1e",
+              "outline": "#727783",
+              "surface-container-lowest": "#ffffff",
+              "surface-dim": "#d8dadc",
+              "surface-variant": "#e0e3e5",
+              "tertiary-fixed-dim": "#ffb691",
+              "tertiary-container": "#9f4300",
+              "on-primary-fixed": "#001b3d",
+              "primary-fixed": "#d6e3ff",
+              "secondary-fixed-dim": "#a5caf4",
+              "tertiary-fixed": "#ffdbcb",
+              "on-secondary-container": "#355b7f",
+              "background": "#f7f9fb",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#793100",
+              "on-error": "#ffffff",
+              "on-primary": "#ffffff",
+              "primary-container": "#005eb8",
+              "secondary": "#3c6186",
+              "on-surface-variant": "#424752",
+              "inverse-surface": "#2d3133",
+              "surface-tint": "#005db6",
+              "inverse-primary": "#a9c7ff",
+              "on-primary-fixed-variant": "#00468c",
+              "on-surface": "#191c1e",
+              "secondary-container": "#add2fd",
+              "outline-variant": "#c2c6d4",
+              "on-error-container": "#93000a",
+              "surface": "#f7f9fb",
+              "on-tertiary-fixed": "#341100",
+              "primary-fixed-dim": "#a9c7ff",
+              "surface-container": "#eceef0",
+              "tertiary": "#793100",
+              "error-container": "#ffdad6",
+              "on-primary-container": "#c8daff",
+              "error": "#ba1a1a",
+              "on-secondary-fixed": "#001d34"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .gradient-primary {
+        background: linear-gradient(135deg, #00478d 0%, #005eb8 100%);
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 h-16 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border-none">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tight text-blue-900 dark:text-blue-100 font-headline">MediFinder</span>
+<div class="hidden md:flex gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors px-3 py-1 rounded" href="{{ url_for('index') }}">Home</a>
+<a class="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-700 transition-all px-3 py-1" href="{{ url_for('about') }}">About</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors px-3 py-1 rounded" href="{{ url_for('help_page') }}">Help</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center bg-surface-container-low px-4 py-1.5 rounded-full border border-outline-variant/15">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2">search</span>
+<input class="bg-transparent border-none text-sm focus:ring-0 p-0 text-on-surface-variant w-40" placeholder="Search resources..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined text-on-surface-variant p-2 hover:bg-slate-50 rounded-full transition-colors">account_circle</button>
+<a href="{{ url_for('login') }}" class="gradient-primary text-on-primary px-6 py-1.5 rounded-lg font-semibold text-sm shadow-sm active:opacity-80 active:scale-95 transition-all">Login</a>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-20">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 mb-24">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<span class="text-primary font-bold tracking-widest text-xs uppercase mb-4 block">About Our Mission</span>
+<h1 class="text-6xl md:text-7xl font-extrabold font-headline text-on-surface leading-tight tracking-tight mb-8">
+                        Helping people find <br/>
+<span class="text-primary-container">life-saving</span> <br/>
+                        medication quickly.
+                    </h1>
+<p class="text-xl text-on-surface-variant max-w-xl leading-relaxed">
+                        In critical moments, every second counts. MediFinder bridges the gap between patients and pharmacies, providing real-time inventory insights to ensure health never has to wait.
+                    </p>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-square rounded-3xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Modern high-tech clinical lab with blue lighting and scientists working with advanced medical equipment in a sanctuary-like atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbfAb2NFCRIekchvn17Ssk7x0gf54Sa8jIRcpe-Ucvv10bjtMFsMR2NtPPzDHSrU8iYP4LWa7mOgqA7XSVJ6aTpaz6bhDUtzQghKkHKj0ulm7syK_uo5mVMu6TgL2GyqW7eb7mR0Jt4CeR9QJ6-XnIC_5xANMUw0zEXhkVy7_55AGf4DnILVyYtpZhPNV9qPgDLqdAt3H9XJ38muZHQi1mGN6NiXTUVAAk-L9aVqhrz1zZdqgjQ2eGJtF322afv8zKNuyWgOmYtwU"/>
+</div>
+<!-- Glass Overlay Badge -->
+<div class="absolute -bottom-6 -left-6 glass-card p-6 rounded-2xl shadow-xl border border-white/20 max-w-xs">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-weight="fill">verified_user</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Trusted Quality</h4>
+<p class="text-xs text-on-surface-variant">Verified by over 2,000 certified pharmacies nationwide.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Values Grid (Bento Style) -->
+<section class="max-w-7xl mx-auto px-8 mb-32">
+<h2 class="text-3xl font-bold font-headline mb-12 text-center">Core Values</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="md:col-span-2 bg-surface-container-low p-10 rounded-3xl border border-outline-variant/10 flex flex-col justify-between min-h-[300px] hover:bg-surface-container transition-colors group">
+<div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">speed</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold font-headline mb-3">Absolute Velocity</h3>
+<p class="text-on-surface-variant text-lg">We optimize every database query and UI interaction because we know that when it comes to medicine, speed is safety.</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-highest p-10 rounded-3xl border border-outline-variant/10 flex flex-col justify-between min-h-[300px] hover:bg-surface-dim transition-colors group">
+<div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">diversity_3</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold font-headline mb-3">Community First</h3>
+<p class="text-on-surface-variant">Built by healthcare professionals and developers who care about local accessibility.</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-secondary-fixed p-10 rounded-3xl border border-outline-variant/10 flex flex-col justify-between min-h-[300px] hover:bg-secondary-container transition-colors group">
+<div class="w-14 h-14 bg-on-secondary rounded-2xl flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">shield</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold font-headline mb-3 text-on-secondary-fixed">Reliable Data</h3>
+<p class="text-on-secondary-fixed-variant">Our proprietary syncing engine ensures that "In Stock" actually means it is on the shelf.</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="md:col-span-2 bg-primary-container p-10 rounded-3xl border border-outline-variant/10 flex flex-col justify-between min-h-[300px] group">
+<div class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center text-on-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">visibility</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold font-headline mb-3 text-on-primary">Radical Transparency</h3>
+<p class="text-on-primary-container text-lg">No hidden costs, no gatekeeping information. We believe health data should be accessible to everyone who needs it.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section (Asymmetric Accordion) -->
+<section class="bg-surface-container-low py-24">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-20">
+<div>
+<h2 class="text-4xl font-extrabold font-headline mb-6">Frequently Asked Questions</h2>
+<p class="text-on-surface-variant text-lg mb-8">Can’t find what you’re looking for? Reach out to our 24/7 support team for personal assistance.</p>
+<div class="flex gap-4">
+<button class="bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-semibold hover:bg-surface-container-highest transition-colors">Contact Support</button>
+<button class="text-primary font-bold flex items-center gap-2 px-4">Documentation <span class="material-symbols-outlined">arrow_forward</span></button>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Accordion Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-300 border border-outline-variant/5">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-surface-bright transition-colors group">
+<span class="font-bold text-on-surface text-lg">How do I update medicine status?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-180 transition-transform">expand_more</span>
+</button>
+<div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
+                            Log in to your Pharmacy Manager Dashboard, navigate to the "Inventory" tab, and select the specific medication. You can toggle stock levels and update quantity in one click.
+                        </div>
+</div>
+<!-- Accordion Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-300 border border-outline-variant/5">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-surface-bright transition-colors group">
+<span class="font-bold text-on-surface text-lg">Is this service free?</span>
+<span class="material-symbols-outlined text-primary">expand_more</span>
+</button>
+</div>
+<!-- Accordion Item 3 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-300 border border-outline-variant/5">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-surface-bright transition-colors group">
+<span class="font-bold text-on-surface text-lg">How accurate is the inventory data?</span>
+<span class="material-symbols-outlined text-primary">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Credentials Section -->
+<section class="max-w-4xl mx-auto px-8 mt-24">
+<div class="bg-on-surface rounded-3xl p-12 text-on-primary-container relative overflow-hidden shadow-2xl">
+<!-- Background decoration -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary opacity-20 blur-[100px] -mr-32 -mt-32"></div>
+<h2 class="text-white text-3xl font-bold font-headline mb-4">Demo Admin Access</h2>
+<p class="text-slate-400 mb-8 max-w-lg">Testing the system? Use these credentials to access the pharmacy manager dashboard features.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+<div class="bg-slate-800/50 backdrop-blur-md rounded-2xl p-6 border border-white/5 flex flex-col justify-between">
+<div>
+<span class="text-xs uppercase tracking-widest text-primary-fixed mb-1 block">Username</span>
+<code class="text-xl font-mono text-white">admin@medifinder.test</code>
+</div>
+<button class="mt-4 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+<span class="text-sm font-medium">Copy</span>
+</button>
+</div>
+<div class="bg-slate-800/50 backdrop-blur-md rounded-2xl p-6 border border-white/5 flex flex-col justify-between">
+<div>
+<span class="text-xs uppercase tracking-widest text-primary-fixed mb-1 block">Password</span>
+<code class="text-xl font-mono text-white">demo_vault_2024</code>
+</div>
+<button class="mt-4 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+<span class="text-sm font-medium">Copy</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 w-full py-12 px-8 border-t border-slate-200/10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+<div class="flex flex-col gap-4">
+<span class="text-xl font-bold text-slate-900 dark:text-white font-headline">MediFinder</span>
+<p class="text-slate-500 hover:text-blue-500 text-sm tracking-wide">© 2024 MediFinder. The Digital Sanctuary for Health.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-bold text-slate-800 dark:text-slate-200">Resources</h5>
+<div class="flex flex-col gap-2">
+<a class="text-slate-500 hover:text-blue-500 text-sm underline decoration-blue-500/30 underline-offset-4 transition-opacity duration-300" href="#">About</a>
+<a class="text-slate-500 hover:text-blue-500 text-sm underline decoration-blue-500/30 underline-offset-4 transition-opacity duration-300" href="#">Help</a>
+<a class="text-slate-500 hover:text-blue-500 text-sm underline decoration-blue-500/30 underline-offset-4 transition-opacity duration-300" href="#">Pharmacy Partners</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-bold text-slate-800 dark:text-slate-200">Legal</h5>
+<div class="flex flex-col gap-2">
+<a class="text-slate-500 hover:text-blue-500 text-sm underline decoration-blue-500/30 underline-offset-4 transition-opacity duration-300" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-blue-500 text-sm underline decoration-blue-500/30 underline-offset-4 transition-opacity duration-300" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-blue-500 text-sm underline decoration-blue-500/30 underline-offset-4 transition-opacity duration-300" href="#">Contact</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
